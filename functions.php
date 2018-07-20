@@ -5,7 +5,7 @@
    Plugin URI:  https://github.com/lettertoamit/Wp-adding-user-link/tree/master/
    Description: Plugin for adding user id to link for more work(mailto :-- lettertoamit@gmail.com)
    Version: 1.0
-   Author: Amit Sharma 
+   Author: Amit Sharma , Sunny 
    Author URI: https://github.com/lettertoamit
    License: MIT
   */
