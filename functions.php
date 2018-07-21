@@ -12,7 +12,7 @@
  
 add_action('init', 'dcc_rewrite_tags');
 function dcc_rewrite_tags() {
-    add_rewrite_tag('%propref%', '([^&]+)');
+    add_rewrite_tag('%propref%', '([^&]+)'); 
 }
 
 add_action('init', 'dcc_rewrite_rules');
@@ -28,11 +28,36 @@ foreach ($pages as $page) {
 	// //	var_dump($user);	
 	// }
 	//   add_rewrite_rule('^p-'.$user->user_login.'/(.+)/(.+)/'.$page->post_name.'/?$','index.php?page_id='.$page->ID.'&propref=$matches[1]','top');
+
+	add_rewrite_rule('^p-(.+)/'.$page->post_name.'/?$','index.php?page_id='.$page->ID.'&propref=$matches[1]','top');
+	
+
 	add_rewrite_rule('^p-'.$user->user_login.'/'.$page->post_name.'/?$','index.php?page_id='.$page->ID.'&propref=$matches[1]','top');
+
     add_rewrite_rule('^p-'.$user->user_login.'/(.+)/(.+)/'.$page->post_name.'/?$','index.php?page_id='.$page->ID.'&propref=$matches[1]','top');
 }
  //add_rewrite_rule('^team/(.+)/(.+)/?$','index.php?propref=$matches[1]&propref=$matches[1]','top');
 flush_rewrite_rules(true);
 }
  
+
+ function get_current_url_name()
+{
+    global $post;
+    $vax = get_query_var('propref',false); 
+    if($vax)
+    {
+    	 $check  =  username_exists($vax); 
+	     if(!$check)
+	     {
+	     	$a = home_url();
+	        wp_redirect($a);
+	        exit();
+	     }
+
+    }
+   
+    
+}
+add_action( 'template_redirect', 'get_current_url_name' );
  ?>
